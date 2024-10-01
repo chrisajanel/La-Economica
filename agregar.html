@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="agregar.css">
+    <link rel="icon" href="./icono.png" type="image/png" sizes="100x36"></head>
+
+</head>
+<body>
+    <header class="header">
+        <h1>
+            <img src="./icono.png" alt="" class="logo">
+        </h1>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ver.html">Lista de productos</a>
+            <a href="agregar.html">Agregar producto</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h1>Agregar Producto a Inventario</h1>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombre">Nombre del Producto:</label>
+                <input type="text" id="nombre" name="nombre">
+            </div>
+            <div class="form-group">
+                <label for="proveedor">Proveedor:</label>
+                <input type="text" id="proveedor" name="proveedor">
+            </div>
+            <div class="form-group">
+                <label for="precioFacturado">Precio Facturado:</label>
+                <input type="number" id="precioFacturado" name="precioFacturado">
+            </div>
+        </div>
+
+        <h2>Precios de Venta</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="precioUnidad">Unidad (1 unidad):</label>
+                <input type="number" id="precioUnidad" name="precioUnidad"> 
+                <input type="checkbox" id="habilitarPrecioUnidad" checked onclick="toggleInput('precioUnidad')"> Habilitar
+            </div>
+            <div class="form-group">
+                <label for="precioMediaDocena">1/2 Docena (6 unidades):</label>
+                <input type="number" id="precioMediaDocena" name="precioMediaDocena">
+                <input type="checkbox" id="habilitarPrecioMediaDocena" checked onclick="toggleInput('precioMediaDocena')"> Habilitar
+            </div>
+            <div class="form-group">
+                <label for="precioDocena">Docena (12 unidades):</label>
+                <input type="number" id="precioDocena" name="precioDocena">
+                <input type="checkbox" id="habilitarPrecioDocena" checked onclick="toggleInput('precioDocena')"> Habilitar
+            </div>
+            <div class="form-group">
+                <label for="precioFardo">Fardo:</label>
+                <input type="number" id="precioFardo" name="precioFardo">
+                <input type="checkbox" id="habilitarPrecioFardo" checked onclick="toggleFardoInputs()"> Habilitar
+            </div>
+        </div>
+
+        <button class="btn" id="agregarProductoBtn">Agregar Producto</button>
+
+        <div class="product-list-container">
+            <div class="product-list-header">
+                <span class="product-name">Nombre</span>
+                <span class="product-provider">Proveedor</span>
+                <span>      Precio Facturado</span>
+                <span>Unidad</span>
+                <span>Media Docena</span>
+                <span>Docena</span>
+                <span>Fardo</span>
+                <span>Acciones</span>
+            </div>
+            <ul class="product-list" id="productList"></ul>
+        </div>
+    </div>
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Producto guardado con éxito.</p>
+        </div>
+    </div>
+    
+    <script src="agregar.js"></script>
+</body>
+</html>

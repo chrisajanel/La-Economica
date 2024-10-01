@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturación</title>
+    <link rel="stylesheet" href="facturacion.css">
+    <link rel="icon" href="./icono.png" type="image/png" sizes="100x36"></head>
+
+</head>
+<body>
+    <header class="header">
+        <h1>
+            <img src="./icono.png" alt="" class="logo">
+        </h1>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ver.html">Lista de productos</a>
+            <a href="agregar.html">Agregar producto</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+
+    <!-- Contenedor de búsqueda de productos -->
+    <div class="product-search"> 
+        <h3>Búsqueda de Productos</h3>
+        <form>
+            <label for="productName">Producto:</label>
+            <input type="text" id="searchProduct" name="productName" placeholder="nombre del producto">
+            
+            <label for="productUnit">Unidad:</label>
+            <select id="searchProductUnit" name="productUnit">
+                <option value="unidad">Unidad</option>
+                <option value="media-docena">Media Docena</option>
+                <option value="docena">Docena</option>
+                <option value="fardo">Fardo</option>
+            </select>
+            
+            <div id="searchProductPrice">
+                <p>Precio: <span id="priceDisplay">0.00</span></p>
+            </div>
+        </form>
+        <!-- Contenedor para las sugerencias de autocompletado -->
+        <ul id="suggestionsLista" class="suggestions-lista"></ul>
+    </div>
+
+    <!-- Conte55nedor de facturación -->
+    
+    
+
+<div class="container">        
+    <form id="billingForm">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="nombreCliente">Nombre del Cliente:</label>
+                <input type="text" id="nombreCliente" name="nombreCliente">
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion">
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <label for="producto">Producto:</label>
+            <div class="autocomplete-container">
+                <input type="text" id="producto" name="producto" placeholder="nombre del producto">
+                <ul id="suggestionss" class="suggestionss-list"></ul>
+            </div>
+        </div>            
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" min="1" value="1">
+            </div>
+            <div class="form-group">
+                <label for="unidad">Unidad:</label>
+                <select id="unidad" name="unidad">
+                    <option value="Media Docena">Media Docena</option>
+                    <option value="Docena">Docena</option>
+                    <option value="Fardo">Fardo</option>
+                    <option value="Unidad">Unidad</option>
+
+                </select>
+            </div>
+            <button type="button" id="agregarProductoBtn">Agregar a Factura</button>
+            <button type="button" id="imprimirProductoBtn">generar Gactura</button>
+            <button type="button" id="limpiar">limpiar</button>
+
+        </div>
+
+        <div class="invoice-list-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cantidad</th>
+                        <th>Unidad</th>
+                        <th>Producto</th>
+                        <th>Total</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody id="invoiceTableBody">
+                </tbody>
+            </table>
+            <div class="invoice-total">
+                <span>Total:</span>
+                <span id="total">0.00</span>
+            </div>
+            
+            <!-- Nuevo input para ingresar el efectivo dado -->
+            <div class="payment-section">
+                <button type="button" id="calcularCambioBtn">Efectivo</button>
+                <input type="number" id="cashInput" placeholder="">
+            </div>
+            
+            <!-- Muestra el cambio -->
+            <div class="change-section">
+                <span>Cambio:</span>
+                <span id="change">0.00</span>
+            </div>
+            
+        </div>
+    </form>
+    <div id="errorModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <p>Este producto no tiene precio en esta unidad.</p>
+        </div>
+    </div>
+</div>
+    <script src="facturacion.js"></script>
+</body>
+</html>

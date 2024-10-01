@@ -1,0 +1,179 @@
+/* Variables CSS */
+:root {
+  --font: 'Oxygen', sans-serif;
+  --primary: #42E2B8;
+  --gradient: linear-gradient(135deg, #42E2B8 0%, #1d4ed8 100%);
+  --black: #2d3436;
+  --light-gray: #dfe6e9;
+  --soft-white: #ffffff;
+  --border-color: #b2bec3;
+  --header-gradient: linear-gradient(135deg, #36b89c 0%, #1d4ed8 100%);
+  --header-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+
+body {
+  background-image: url('./WhatsApp\ Image\ 2024-08-21\ at\ 13.51.05.jpeg');
+  background-size: cover; /* La imagen cubrirá toda la pantalla */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Mantiene la imagen fija cuando se hace scroll */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.modal-overlay-active {
+  overflow: hidden; /* Desactiva el scroll cuando el modal está activo */
+}
+
+
+  
+/* Estilos para el header */
+.header {
+  background: linear-gradient(135deg, #42E2B8 0%, #1d4ed8 100%);
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  border-radius: 0 0 20px 20px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header h1 {
+  display: flex;
+  align-items: center;
+  margin: 0; /* Asegura que no haya margen adicional */
+  padding: 0 0px; /* Espacio alrededor del título */
+}
+
+.header .logo {
+  height: 100px; /* Ajusta la altura según el tamaño de tu logo */
+  margin-right: 150px; /* Espacio entre el logo y el texto */
+}
+
+.nav {
+  display: flex;
+  gap: 10px; /* Espacio entre cada enlace de navegación */
+  padding-right: 60px; /* Espacio adicional a la derecha de la navegación */
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 20px; /* Espacio horizontal entre los enlaces */
+}
+
+.nav a:last-child {
+  margin-right: 0; /* Asegura que el último enlace no tenga margen extra a la derecha */
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+  
+  /* Contenedor de botones */
+  .button-container {
+    display: flex;
+    flex-direction: column; /* Coloca los botones en una columna */
+    gap: 20px;
+    align-items: center; /* Centra los botones horizontalmente */
+    justify-content: center; /* Centra los botones verticalmente */
+    height: 100%; /* Ocupa toda la altura disponible */
+    margin-top: 80px; /* Ajusta según el tamaño del header */
+  }
+  
+  /* Estilos para los botones */
+  .button {
+    background-color: var(--primary); /* Color principal */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra para resaltar */
+  }
+  
+  .button:hover {
+    background-color: #36b89c; /* Color de hover */
+  }
+  
+  /* Estilos para el overlay del modal */
+  .modal-overlay {
+    display: none; /* Oculta el overlay por defecto */
+    position: fixed;
+    z-index: 999; /* Asegura que el overlay esté encima del contenido */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Capa de fondo semi-transparente */
+    pointer-events: auto; /* Asegura que la capa de fondo bloquee los eventos */
+    justify-content: center; /* Centra el contenido del modal horizontalmente */
+    align-items: center; /* Centra el contenido del modal verticalmente */
+  }
+  
+  /* Estilos para el contenido del modal */
+  .modal-content {
+    background: linear-gradient(135deg, #42E2B8 0%, #1d4ed8 100%);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: #fff;
+    width: 300px; /* Ajusta el ancho según el contenido */
+    max-width: 90%; /* Asegura que el modal no se exceda del viewport */
+    box-sizing: border-box;
+    position: relative; /* Para asegurar el control del contenido dentro del modal */
+  }
+  
+  .modal-content input[type="password"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    width: 80%;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .modal-content button {
+    background: #3A0CA3;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .modal-content button:hover {
+    background: #1d4ed8;
+  }
+  
+  #error-message {
+    display: none;
+    color: #FF7B7B;
+    margin-top: 10px;
+  }
+  
+  /* Estilo para deshabilitar el contenido cuando el modal está activo */
+  .modal-overlay-active {
+    pointer-events: none; /* Bloquea todos los eventos en el contenido principal */
+  }
+  

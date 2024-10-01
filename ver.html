@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Productos</title>
+    <link rel="stylesheet" href="ver.css"> <!-- Tu CSS aquí -->
+    <link rel="icon" href="./icono.png" type="image/png" sizes="100x36"></head>
+
+</head>
+<body>
+    <header class="header">
+        <h1>
+            <img src="./icono.png" alt="" class="logo">
+        </h1>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ver.html">Lista de productos</a>
+            <a href="agregar.html">Agregar producto</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+    <br><br><br>
+    <h1>Lista de Productos</h1>
+
+    <div class="product-list-container">
+        <div class="product-list-header">
+            <span>Nombre</span>
+            <span>Proveedor</span>
+            <span>Precio Facturado</span>
+            <span>Precio Unidad</span>
+            <span>Precio Media Docena</span>
+            <span>Precio Docena</span>
+            <span>Precio Fardo</span>
+        </div>
+        <ul id="productList" class="product-list">
+            <!-- Productos cargados desde localStorage -->
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const productList = document.getElementById('productList');
+
+            // Cargar productos desde localStorage
+            function loadProductsFromLocalStorage() {
+                const products = JSON.parse(localStorage.getItem('productos')) || [];
+                productList.innerHTML = ''; // Limpiar la lista antes de cargar
+                products.forEach(product => {
+                    addProductToList(product);
+                });
+            }
+
+            // Añadir producto a la lista en la UI
+            function addProductToList(product) {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${product.nombre}</span>
+                    <span>${product.proveedor}</span>
+                    <span>${product.precioFacturado}</span>
+                    <span>${product.precioUnidad}</span>
+                    <span>${product.precioMediaDocena}</span>
+                    <span>${product.precioDocena}</span>
+                    <span>${product.precioFardo}</span>
+                `;
+                productList.appendChild(li);
+            }
+
+            // Cargar productos al cargar la página
+            loadProductsFromLocalStorage();
+        });
+    </script>
+
+</body>
+</html>

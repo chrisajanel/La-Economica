@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura de Compra</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            max-width: 13.8cm; /* Ajusta el ancho máximo a 10 cm */
+            margin: 0 auto; /* Centra el contenido en la pantalla */
+        }
+
+        /* Título de la factura */
+        h1 {
+            text-align: center;
+            margin: 1px 0;
+            font-size: 20px; /* Reduce el tamaño del texto */
+            color: #2C3E50;
+        }
+
+        /* Tabla de factura */
+        table {
+            width: 98%; /* Asegura que la tabla ocupe el 100% del ancho disponible */
+            margin: 0 auto 10px;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            font-size: 12px; /* Reduce el tamaño de la fuente en la tabla */
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 5px; /* Reduce el padding para hacer la tabla más compacta */
+            text-align: left;
+        }
+
+        table th {
+            background-color: #2C3E50;
+            color: white;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+         /* Ajustar específicamente la columna de cantidad */
+         table td:first-child {
+            width: 60px; /* Ancho fijo para la columna de cantidad */
+        }
+
+        table td:nth-child(2) {
+            width: 80px; /* Ancho fijo para la columna de unidad */
+        }
+
+        table td:nth-child(3) {
+            width: 275px; /* Ancho fijo para la columna de unidad */
+        }
+
+       /* Total */
+p {
+    text-align: center;
+    font-size: 15px; /* Reduce el tamaño del texto */
+}
+
+.total {
+    font-weight: bold; /* Hacer el texto en negrita */
+    font-size: 16px; /* Tamaño de fuente igual al del total */
+    color: black; /* Color igual al del total */
+    text-align: right; /* Alinear el texto a la izquierda */
+    margin-right: 10px; /* Agregar margen derecho para separación */}
+
+#total {
+    font-weight: bold; /* Mantener el texto en negrita */
+    font-size: 16px; /* Tamaño de fuente igual */
+    color: #2C3E50; /* Color igual */
+}
+
+/* Estilos para Efectivo Dado y Cambio */
+#efectivoDado,
+#cambioRecibido {
+    font-weight: bold; /* Para hacer el texto más destacado */
+    font-size: 16px; /* Aumenta el tamaño del texto si es necesario */
+    color: #2C3E50; /* El mismo color que el total */
+    text-align: right; /* Alinear el texto a la izquierda */   
+    margin-right: 10px; /* Agregar margen derecho para separación */
+    line-height: 0.1; /* Ajusta este valor para reducir el espacio entre líneas */
+    }
+
+
+        #graciasTexto {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            color: #2C3E50;
+        }
+
+        /* Header */
+        header {
+    position: relative;
+    width: 100%; /* Mantén el ancho completo */
+    height: 140px; /* Ajusta la altura */
+}
+
+.header-background {
+    position: absolute; /* Permite que se superponga en el fondo */
+    top: 0; /* Alinea en la parte superior */
+    left: 0; /* Alinea a la izquierda */
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    height: 100%; /* Ajusta la altura al 100% del contenedor */
+    object-fit: cover; /* Asegura que la imagen cubra todo el espacio */
+    z-index: -1; /* Envía la imagen al fondo */
+}
+
+
+.header-content {
+            position: relative;
+            z-index: 1;
+            padding: 2px;
+            margin-top: -10px;
+
+            .header-content {
+    display: flex;
+    align-items: flex-start; /* Cambia de 'center' a 'flex-start' para alinearlo al principio */
+}
+
+        }
+
+        .logo img {
+    width: 30%; /* Ajusta el tamaño del logo al ancho disponible */
+    margin-top: 5px; /* Prueba con un valor más alto */
+}
+
+
+        .info p {
+            margin: 50px;
+            font-size: 0.7em; /* Reduce el tamaño de la fuente en la información */
+            margin-top: -50px;
+        }
+
+        /* Modal de error */
+        #errorModal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        #errorModal p {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .close-btn {
+            margin-top: 10px;
+        }
+
+        :root {
+  --font: 'Oxygen', sans-serif;
+  --primary: #42E2B8;
+  --gradient: linear-gradient(135deg, #42E2B8 0%, #1d4ed8 100%);
+  --black: #2d3436;
+  --light-gray: #dfe6e9;
+  --soft-white: #ffffff;
+  --border-color: #b2bec3;
+  --header-gradient: linear-gradient(135deg, #36b89c 0%, #1d4ed8 100%);
+  --header-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  --shadow: rgba(0, 0, 0, 0.2); /* Sombra para inputs */
+  --button-bg: #42E2B8;
+  --button-text: #fff;
+  --button-hover: #36b89c;
+  --text-color: #333; /* Color del texto en los labels */
+}
+         /* Estilo del botón de imprimir */
+    #imprimirProductoBtn {
+        padding: 12px 20px;
+        background-color: var(--button-bg); /* Asegúrate de que estas variables de CSS existan */
+        color: var(--button-text);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        position: fixed; /* Fija el botón en la pantalla */
+        left: 10px; /* Ubícalo a 10px del borde izquierdo */
+        top: 20px; /* Ubícalo a 20px desde la parte superior */
+        z-index: 1000; /* Asegúrate de que el botón esté por encima del contenido */
+    }
+
+    #imprimirProductoBtn:hover {
+    background-color: var(--button-bg-hover); /* Cambia el color de fondo al hacer hover */
+    color: white; /* Cambia el color del texto a blanco */
+}
+
+
+
+.customer-info {
+    display: flex;
+    gap: 10px; /* Espacio entre los elementos */
+    align-items: center;
+    margin-top: -20px;
+}
+
+.customer-info p {
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
+    margin: 0;
+}
+
+.nom, .direccion {
+    margin-bottom: 10px; /* Espacio entre líneas si lo deseas */
+}
+
+#fechaContainer {
+    position: absolute;
+    top: 10px; /* Ajusta la distancia desde la parte superior */
+    right: 145px; /* Ajusta la distancia desde la parte derecha */
+    font-size: 14px; /* Tamaño de fuente de la fecha */
+    font-weight: bold;
+    color: #333;
+}
+
+
+ </style>
+     <link rel="icon" href="./icono.png" type="image/png" sizes="100x36"></head>
+
+</head>
+<body>
+
+    <!-- Encabezado de la factura -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="./icono.png" alt="Logo de la tienda">
+            </div>
+            <div class="info">
+                <p>Aldea Chapas, Nueva Santa Rosa,</p>
+                <p>Santa Rosa, Guatemala</p>
+                <p>Teléfono: 46-06-36-58</p>
+            </div>
+        </div>
+        <!-- Imagen de fondo reemplazada aquí -->
+        <img src="./encabezado_fac-removebg-preview.png" alt="Encabezado de la tienda" class="header-background">
+    </header>
+
+<!--ESPACIO PARA NOMBRE Y DIRECCION DEL CLIENTE-->
+<!-- Espacio donde se mostrará el nombre y dirección del cliente -->
+<div class="customer-info">
+    <p class="nom"><strong>Nombre:</strong> <span id="clienteNombreDisplay">[Nombre del Cliente]</span></p>
+    <p class="direccion"><strong>Dirección:</strong> <span id="clienteDireccionDisplay">[Dirección del Cliente]</span></p>
+</div>
+
+<div id="fechaContainer">
+    <span id="fechaDisplay"></span>
+</div>
+
+<br>
+    <h1>COMPROBANTE</h1>
+
+    <!-- Tabla para la factura -->
+    <table>
+        <thead>
+            <tr>
+                <th>Cantidad</th>
+                <th>Unidad</th>
+                <th>Producto</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="invoiceTableBody">
+            <!-- Aquí se agregarán los productos seleccionados -->
+        </tbody>
+    </table>
+
+    <!-- Mostrar el total -->
+    <p class="total">Total: Q <span id="total">0.00</span></p>
+    <p style="text-align: right;"><strong>Efectivo: Q</strong> <span id="efectivoDado">0.00</span></p>
+    <p style="text-align: right;"><strong>Cambio: Q</strong> <span id="cambioRecibido">0.00</span></p>
+    
+    <!-- Texto de agradecimiento -->
+    <p id="graciasTexto">Gracias por su compra. ¡Vuelva pronto y que Dios lo bendiga!</p>
+
+    <!-- Modal de error -->
+    <div id="errorModal">
+        <p>Error: No se pudo agregar el producto.</p>
+        <button class="close-btn">Cerrar</button>
+    </div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    const invoiceTableBody = document.getElementById('invoiceTableBody');
+    const totalElement = document.getElementById('total');
+    const nombreDisplay = document.getElementById('clienteNombreDisplay');
+    const direccionDisplay = document.getElementById('clienteDireccionDisplay');
+
+    // Obtén la fecha actual
+const fechaActual = new Date();
+
+// Formatea la fecha (por ejemplo: dd/mm/yyyy)
+const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
+const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
+
+// Inserta la fecha en el span correspondiente
+document.getElementById('fechaDisplay').textContent = fechaFormateada;
+    // Cargar productos desde localStorage
+    loadInvoiceFromLocalStorage();
+    // Cargar datos del cliente desde localStorage
+    loadClientData();
+
+    // Actualizar el total de la factura
+    function updateTotal() {
+        let total = 0;
+        document.querySelectorAll('#invoiceTableBody tr').forEach(row => {
+            const subtotal = parseFloat(row.cells[3].innerText);
+            total += subtotal;
+        });
+        totalElement.innerText = total.toFixed(2);
+    }
+
+    // Guardar la factura en localStorage
+    function saveInvoiceToLocalStorage() {
+        const invoiceItems = [];
+        document.querySelectorAll('#invoiceTableBody tr').forEach(row => {
+            const cantidad = row.cells[0].innerText;
+            const unidad = row.cells[1].innerText;
+            const nombre = row.cells[2].innerText;
+            const subtotal = row.cells[3].innerText;
+            invoiceItems.push({ cantidad, unidad, nombre, subtotal });
+        });
+        const total = totalElement.innerText;
+
+        localStorage.setItem('invoiceItems', JSON.stringify(invoiceItems));
+        localStorage.setItem('invoiceTotal', total);
+    }
+
+    // Cargar la factura desde localStorage
+    function loadInvoiceFromLocalStorage() {
+        const invoiceItems = JSON.parse(localStorage.getItem('invoiceItems')) || [];
+        const total = localStorage.getItem('invoiceTotal') || '0.00';
+
+        invoiceItems.forEach(item => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${item.cantidad}</td>
+                <td>${item.unidad}</td>
+                <td>${item.nombre}</td>
+                <td>${item.subtotal}</td>
+            `;
+            invoiceTableBody.appendChild(tr);
+        });
+
+        totalElement.innerText = total;
+    }
+
+    // Cargar los datos del cliente
+    function loadClientData() {
+                const nombreCliente = localStorage.getItem('nombreCliente') || "[Nombre del Cliente]";
+                const direccion = localStorage.getItem('direccion') || "[Dirección del Cliente]";
+                
+                // Mostrar los datos en los campos correspondientes
+                nombreDisplay.innerText = nombreCliente;
+                direccionDisplay.innerText = direccion;
+            }
+});
+ // Función para imprimir la factura
+ function printInvoice() {
+        // Mostrar el cuadro de diálogo de impresión
+        window.print();
+    }
+
+    // Recupera los datos desde localStorage
+    const efectivo = localStorage.getItem('efectivo');
+        const cambio = localStorage.getItem('cambio');
+
+        // Muestra los valores en los elementos del HTML
+        document.getElementById('efectivoDado').textContent = efectivo ? efectivo : 'N/A';
+        document.getElementById('cambioRecibido').textContent = cambio ? cambio : 'N/A';
+    </script>
+
+</body>
+<button id="imprimirProductoBtn" onclick="printInvoice()">Imprimir</button>
+
+</html>

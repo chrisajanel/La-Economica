@@ -1,0 +1,288 @@
+/* Variables CSS */
+:root {
+  --font: 'Oxygen', sans-serif;
+  --primary: #42E2B8;
+  --gradient: linear-gradient(135deg, #42E2B8 0%, #1d4ed8 100%);
+  --black: #2d3436;
+  --light-gray: #dfe6e9;
+  --soft-white: #ffffff;
+  --border-color: #b2bec3;
+  --header-gradient: linear-gradient(135deg, #36b89c 0%, #1d4ed8 100%);
+  --header-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilos generales */
+body {
+  font-family: var(--font);
+  margin: 0;
+  padding: 140px 30px 30px; /* Padding superior para evitar que el header cubra el contenido */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 380vh;
+  box-sizing: border-box;
+}
+
+/* Estilos para el header */
+.header {
+  background: var(--header-gradient);
+  padding: 10px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  border-radius: 0 0 20px 20px;
+  width: 100%;
+  box-shadow: var(--header-shadow);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header h1 {
+  display: flex;
+  align-items: center;
+  margin: 0; /* Asegura que no haya margen adicional */
+  padding: 0 0px; /* Espacio alrededor del título */
+}
+
+.header .logo {
+  height: 100px; /* Ajusta la altura según el tamaño de tu logo */
+  margin-right: 150px; /* Espacio entre el logo y el texto */
+}
+
+.nav {
+  display: flex;
+  gap: 10px; /* Espacio entre cada enlace de navegación */
+  padding-right: 60px; /* Espacio adicional a la derecha de la navegación */
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 20px; /* Espacio horizontal entre los enlaces */
+}
+
+.nav a:last-child {
+  margin-right: 0; /* Asegura que el último enlace no tenga margen extra a la derecha */
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos del formulario */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Espacio entre los campos del formulario */
+}
+
+.form-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  display: block;
+  color: var(--black);
+}
+
+input[type="text"], input[type="number"] {
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* Espacio superior adicional para el botón */
+}
+
+button:hover {
+  background-color: #13e796;
+}
+
+.delete-btn {
+  background-color: red; /* Set background color to red */
+  color: white; /* Set text color to white for better contrast */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Keep rounded corners for consistency */
+  padding: 6px 12px; /* Adjust padding as needed */
+  cursor: pointer; /* Show pointer on hover */
+  font-size: 14px; /* Font size */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.delete-btn:hover {
+  background-color: darkred; /* Darker shade on hover for effect */
+}
+
+/* Título para la sección de precios de venta */
+h2 {
+  margin-top: 30px;
+  font-size: 24px;
+  color: var(--black);
+  text-align: left;
+}
+
+/* Estilos para la lista de productos */
+.product-list-container {
+  margin-top: 30px;
+  width: 100%; /* Se asegura que la lista ocupe el ancho completo disponible */
+}
+
+/* Encabezado de la lista de productos */
+.product-list-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: 5px solid var(--primary);
+  padding-bottom: 10px;
+  margin-bottom: 10px; /* Ajusta según el espacio necesario */
+  color: var(--black);
+  background-color: var(--light-gray); /* Opcional para que tenga un fondo visible */
+}
+
+/* Encabezado de cada columna */
+.product-list-header span {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Estilos de la lista de productos */
+.product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.537);
+  transition: transform 0.2s ease;
+}
+
+.product-list li:hover {
+  transform: translateY(-3px);
+}
+
+.product-list li span {
+  flex: 1;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.edit-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-btn:hover {
+  background-color: #13e796;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .form-group {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .product-list-header {
+    flex-direction: column;
+  }
+
+  .product-list-header span {
+    text-align: left;
+  }
+
+  .product-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-list li span {
+    text-align: left;
+  }
+
+  button.edit-btn,
+  button.save-btn {
+    margin-top: 10px;
+  }
+}
+
+/* Estilos para el modal */
+.modal {
+  display: none; /* Oculto por defecto */
+  position: fixed; /* Fijado en la pantalla */
+  z-index: 1000; /* Sobre otros elementos */
+  left: 0;
+  top: 0;
+  width: 100%; /* Ancho total */
+  height: 100%; /* Altura total */
+  overflow: auto; /* Habilitar scroll si es necesario */
+  background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto; /* Centrando el contenido */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Ancho del modal */
+  max-width: 400px; /* Ancho máximo */
+  text-align: center; /* Texto centrado */
+  border-radius: 10px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

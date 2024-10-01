@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LA ECONOMICA</title>
+    <link rel="stylesheet" href="inicio.css">
+    <link rel="icon" href="./icono.png" type="image/png" sizes="100x36"></head>
+<body>
+  
+    <!-- Modal para contraseña -->
+    <div id="passwordModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Ingrese la contraseña</h2>
+            <input type="password" id="password" placeholder="Contraseña">
+            <button id="submitPassword">Confirmar</button>
+            <p id="error-message">Contraseña incorrecta</p>
+        </div>
+    </div>
+
+    <header class="header">
+        <h1>
+            <img src="./icono.png" alt="" class="logo">
+        </h1>
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="ver.html">Lista de productos</a>
+            <a href="agregar.html">Agregar producto</a>
+            <a href="facturacion.html">Facturación</a>
+        </nav>
+    </header>
+
+    <div id="content" class="content">
+        <!-- Aquí se cargará el contenido dinámico -->
+    </div>
+
+    <script>
+        // Función para verificar si la contraseña ya ha sido ingresada
+        function checkPassword() {
+            if (!sessionStorage.getItem('passwordEntered')) {
+                document.getElementById('passwordModal').style.display = 'flex';
+                document.body.classList.add('modal-overlay-active');
+            }
+        }
+
+        // Función para manejar la confirmación de la contraseña
+        function handlePasswordSubmission() {
+            document.getElementById('submitPassword').addEventListener('click', function() {
+                const password = document.getElementById('password').value;
+                if (password === '1234') {  // La contraseña correcta es "1234"
+                    document.getElementById('passwordModal').style.display = 'none';
+                    sessionStorage.setItem('passwordEntered', 'true');
+                    document.body.classList.remove('modal-overlay-active');
+                } else {
+                    document.getElementById('error-message').style.display = 'block';
+                }
+            });
+        }
+
+        // Ejecutar las funciones al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            checkPassword();
+            handlePasswordSubmission();
+        });
+    </script>
+</body>
+</html>
