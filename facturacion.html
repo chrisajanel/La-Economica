@@ -27,10 +27,16 @@
 
       <label for="searchProductUnit">Unidad:</label>
       <select id="searchProductUnit" name="productUnit">
+        <!-- Unidades existentes -->
         <option value="unidad">Unidad</option>
         <option value="media-docena">Media Docena</option>
         <option value="docena">Docena</option>
         <option value="fardo">Fardo</option>
+        <!-- NUEVAS UNIDADES -->
+        <option value="libra">Libra</option>
+        <option value="arroba">Arroba</option>
+        <option value="paquete">Paquete</option>
+        <option value="x99">x99</option>
       </select>
 
       <div id="searchProductPrice" aria-live="polite">
@@ -65,15 +71,22 @@
       <div class="form-row">
         <div class="form-group">
           <label for="cantidad">Cantidad:</label>
-          <input id="cantidad" name="cantidad" type="number" min="1" value="1"/>
+          <!-- permitir decimales para Libra/Arroba -->
+          <input id="cantidad" name="cantidad" type="number" min="0.01" step="any" value="1" placeholder="Cantidad"/>
         </div>
         <div class="form-group">
           <label for="unidad">Unidad:</label>
           <select id="unidad" name="unidad">
+            <!-- Unidades existentes -->
             <option value="Media Docena">Media Docena</option>
             <option value="Docena">Docena</option>
             <option value="Fardo">Fardo</option>
             <option value="Unidad">Unidad</option>
+            <!-- NUEVAS UNIDADES (factura) -->
+            <option value="Libra">Libra</option>
+            <option value="Arroba">Arroba</option>
+            <option value="Paquete">Paquete</option>
+            <option value="x99">x99</option>
           </select>
         </div>
 

@@ -17,6 +17,8 @@
     .import-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
     .import-row > *{flex:0 0 auto}
     .pill{background:#eef2ff;border:1px solid #c7d2fe;padding:2px 8px;border-radius:999px;font-size:.8rem}
+    .grid{display:grid;gap:14px}
+    .grid-2{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
   </style>
 </head>
 <body>
@@ -39,11 +41,14 @@
     <section class="import-box" aria-labelledby="importar-csv-titulo">
       <h2 id="importar-csv-titulo">Importar desde CSV</h2>
       <p class="inline-help">
-        Guarda tu hoja como <span class="pill">CSV (delimitado por comas)</span>. Encabezados aceptados: 
-        <strong>producto</strong>, <strong>proveedores/ provedores</strong>, 
-        <strong>facturado</strong>, <strong>facturado x uni</strong>, 
-        <strong>precio por u</strong>, <strong>precio 1/2 d</strong>, 
-        <strong>precio por d</strong>, <strong>precio por f</strong>.
+        Guarda tu hoja como <span class="pill">CSV (delimitado por comas)</span>. Encabezados aceptados (no sensibles a mayúsculas):
+        <strong>producto</strong>, <strong>proveedor / provedores</strong>,
+        <strong>facturado</strong>, <strong>facturado x uni</strong>,
+        <strong>precio por u</strong>, <strong>precio 1/2 d</strong>,
+        <strong>precio por d</strong>, <strong>precio por f</strong>,
+        <strong>precio libra</strong>, <strong>precio arroba</strong>,
+        <strong>precio paquete</strong>, <strong>unidades paquete</strong>,
+        <strong>precio 99</strong>.
       </p>
       <div class="import-row">
         <input type="file" id="csvFileInput" accept=".csv" aria-label="Seleccionar archivo CSV"/>
@@ -66,7 +71,7 @@
         </div>
 
         <div class="form-group">
-          <label for="precioFacturado">Precio Facturado:</label>
+          <label for="precioFacturado">Precio Facturado (paquete/caja):</label>
           <input type="number" id="precioFacturado" name="precioFacturado" placeholder="Ej. 240.00" title="Precio facturado del paquete" inputmode="decimal" step="0.01" min="0" required>
         </div>
       </div>
@@ -111,6 +116,52 @@
         </div>
       </div>
 
+      <!-- Nuevas unidades -->
+      <h3>Precios por peso / paquete</h3>
+      <div class="grid grid-2" role="group" aria-label="Precios por peso y paquete">
+        <div class="form-group">
+          <label for="precioLibra">Libra:</label>
+          <input type="number" id="precioLibra" name="precioLibra" placeholder="Ej. 18.00" title="Precio por libra" inputmode="decimal" step="0.01" min="0">
+          <div class="toggle">
+            <input type="checkbox" id="habilitarPrecioLibra" checked aria-controls="precioLibra">
+            <label for="habilitarPrecioLibra">Habilitar libra</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="precioArroba">Arroba <span class="muted">(≈ 25 lb)</span>:</label>
+          <input type="number" id="precioArroba" name="precioArroba" placeholder="Ej. 450.00" title="Precio por arroba" inputmode="decimal" step="0.01" min="0">
+          <div class="toggle">
+            <input type="checkbox" id="habilitarPrecioArroba" checked aria-controls="precioArroba">
+            <label for="habilitarPrecioArroba">Habilitar arroba</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="unidadesPaquete">Unidades por paquete:</label>
+          <input type="number" id="unidadesPaquete" name="unidadesPaquete" placeholder="Ej. 24" title="Cantidad de piezas por paquete" inputmode="numeric" step="1" min="1">
+          <p class="inline-help">Se usa para calcular precio de paquete si solo ingresas precio por unidad.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="precioPaquete">Paquete:</label>
+          <input type="number" id="precioPaquete" name="precioPaquete" placeholder="Ej. 300.00" title="Precio por paquete" inputmode="decimal" step="0.01" min="0">
+          <div class="toggle">
+            <input type="checkbox" id="habilitarPrecioPaquete" checked aria-controls="precioPaquete">
+            <label for="habilitarPrecioPaquete">Habilitar paquete</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="precio99">x99 (precio por 99 unidades):</label>
+          <input type="number" id="precio99" name="precio99" placeholder="Ej. 990.00" title="Precio por 99 unidades" inputmode="decimal" step="0.01" min="0">
+          <div class="toggle">
+            <input type="checkbox" id="habilitarPrecio99" checked aria-controls="precio99">
+            <label for="habilitarPrecio99">Habilitar x99</label>
+          </div>
+        </div>
+      </div>
+
       <button class="btn" id="agregarProductoBtn" type="button">Agregar Producto</button>
     </form>
 
@@ -122,9 +173,13 @@
         <span class="product-provider" role="columnheader">Proveedor</span>
         <span role="columnheader">Precio Facturado</span>
         <span role="columnheader">Unidad</span>
-        <span role="columnheader">Media Docena</span>
+        <span role="columnheader">1/2 Docena</span>
         <span role="columnheader">Docena</span>
         <span role="columnheader">Fardo</span>
+        <span role="columnheader">Libra</span>
+        <span role="columnheader">Arroba</span>
+        <span role="columnheader">Paquete</span>
+        <span role="columnheader">x99</span>
         <span role="columnheader">Acciones</span>
       </div>
       <ul class="product-list" id="productList" role="rowgroup"></ul>
